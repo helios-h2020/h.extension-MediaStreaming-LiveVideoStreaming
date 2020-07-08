@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">helios-mediastreaming LiveVideoStreaming</string>
+
+    <!-- Video Live Streaming Strings -->
+    <string name="start_button">Start stream</string>
+    <string name="switch_camera_button">Switch camera</string>
+    <string name="start_record">Start record</string>
+    <string name="hint_rtmp">rtmp://yourendpoint</string>
+    <string name="protocols">Protocol</string>
+    <string name="tcp">TCP</string>
+    <string name="video">Video</string>
+    <string name="audio">Audio</string>
+    <string name="resolution">Resolution</string>
+    <string name="video_bitrate">Bitrate (on fly)</string>
+    <string name="audio_bitrate">Bitrate</string>
+    <string name="fps">FPS</string>
+    <string name="hardware_rotation">Hardware rotation</string>
+    <string name="samplerate">SampleRate</string>
+    <string name="channel">Channel</string>
+    <string name="stereo">Stereo</string>
+    <string name="mono">Mono</string>
+    <string name="echo_canceler">Echo canceler</string>
+    <string name="camera">Camera</string>
+    <string name="wowza_auth">Wowza Auth</string>
+    <string name="wowza_user">User</string>
+    <string name="wowza_password">Password</string>
+    <string name="noise_suppressor">Noise suppressor</string>
+    <string name="rtsp_streamer">Custom RTSP</string>
+    <string name="microphone">Microphone</string>
+    <string name="stop_button">Stop stream</string>
+    <string name="stop_record">Stop record</string>
+    <string name="drawer_title">Options</string>
+
+</resources>
