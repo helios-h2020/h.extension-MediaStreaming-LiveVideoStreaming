@@ -1,3 +1,21 @@
+/*************************************************************************
+ *
+ * ATOS CONFIDENTIAL
+ * __________________
+ *
+ *  Copyright (2020) Atos Spain SA
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Atos Spain SA and other companies of the Atos group.
+ * The intellectual and technical concepts contained
+ * herein are proprietary to Atos Spain SA
+ * and other companies of the Atos group and may be covered by Spanish regulations
+ * and are protected by copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Atos Spain SA.
+ */
 package eu.h2020.helios_social.modules.livevideostreaming;
 
 import android.Manifest;
@@ -60,7 +78,7 @@ public class LiveVideoStreamingActivity extends AppCompatActivity
   private Integer[] orientations = new Integer[] { 0, 90, 180, 270 };
 
   private RtmpCamera1 rtmpCamera1;
-  private Button bStartStop, bRecord;
+  private Button bStartStop;
   private EditText etUrl;
   private String currentDateAndTime = "";
   private File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -99,10 +117,9 @@ public class LiveVideoStreamingActivity extends AppCompatActivity
     tvBitrate = findViewById(R.id.tv_bitrate);
     etUrl = findViewById(R.id.et_rtp_url);
     etUrl.setHint(R.string.hint_rtmp);
+    etUrl.setText(getIntent().getStringExtra("stream_url"));
     bStartStop = findViewById(R.id.b_start_stop);
     bStartStop.setOnClickListener(this);
-    bRecord = findViewById(R.id.b_record);
-    bRecord.setOnClickListener(this);
     Button switchCamera = findViewById(R.id.switch_camera);
     switchCamera.setOnClickListener(this);
   }
@@ -242,50 +259,7 @@ public class LiveVideoStreamingActivity extends AppCompatActivity
         bStartStop.setText(getResources().getString(R.string.start_button));
         rtmpCamera1.stopStream();
       }
-    }else if(v.getId() == R.id.b_record){
-        Log.d("TAG_R", "b_start_stop: ");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-          if (!rtmpCamera1.isRecording()) {
-            try {
-              if (!folder.exists()) {
-                folder.mkdir();
-              }
-              SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
-              currentDateAndTime = sdf.format(new Date());
-              if (!rtmpCamera1.isStreaming()) {
-                if (prepareEncoders()) {
-                  rtmpCamera1.startRecord(
-                      folder.getAbsolutePath() + "/" + currentDateAndTime + ".mp4");
-                  bRecord.setText(R.string.stop_record);
-                  Toast.makeText(this, "Recording... ", Toast.LENGTH_SHORT).show();
-                } else {
-                  Toast.makeText(this, "Error preparing stream, This device cant do it",
-                      Toast.LENGTH_SHORT).show();
-                }
-              } else {
-                rtmpCamera1.startRecord(
-                    folder.getAbsolutePath() + "/" + currentDateAndTime + ".mp4");
-                bRecord.setText(R.string.stop_record);
-                Toast.makeText(this, "Recording... ", Toast.LENGTH_SHORT).show();
-              }
-            } catch (IOException e) {
-              rtmpCamera1.stopRecord();
-              bRecord.setText(R.string.start_record);
-              Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-          } else {
-            rtmpCamera1.stopRecord();
-            bRecord.setText(R.string.start_record);
-            Toast.makeText(this,
-                "file " + currentDateAndTime + ".mp4 saved in " + folder.getAbsolutePath(),
-                Toast.LENGTH_SHORT).show();
-            currentDateAndTime = "";
-          }
-        } else {
-          Toast.makeText(this, "You need min JELLY_BEAN_MR2(API 18) for do it...",
-              Toast.LENGTH_SHORT).show();
-        }
-    }else if(v.getId() == R.id.switch_camera){
+    } else if(v.getId() == R.id.switch_camera){
         try {
           rtmpCamera1.switchCamera();
         } catch (final CameraOpenException e) {
@@ -327,15 +301,6 @@ public class LiveVideoStreamingActivity extends AppCompatActivity
             .show();
         rtmpCamera1.stopStream();
         bStartStop.setText(getResources().getString(R.string.start_button));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
-            && rtmpCamera1.isRecording()) {
-          rtmpCamera1.stopRecord();
-          bRecord.setText(R.string.start_record);
-          Toast.makeText(LiveVideoStreamingActivity.this,
-              "file " + currentDateAndTime + ".mp4 saved in " + folder.getAbsolutePath(),
-              Toast.LENGTH_SHORT).show();
-          currentDateAndTime = "";
-        }
       }
     });
   }
@@ -356,15 +321,6 @@ public class LiveVideoStreamingActivity extends AppCompatActivity
       @Override
       public void run() {
         Toast.makeText(LiveVideoStreamingActivity.this, "Disconnected", Toast.LENGTH_SHORT).show();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
-            && rtmpCamera1.isRecording()) {
-          rtmpCamera1.stopRecord();
-          bRecord.setText(R.string.start_record);
-          Toast.makeText(LiveVideoStreamingActivity.this,
-              "file " + currentDateAndTime + ".mp4 saved in " + folder.getAbsolutePath(),
-              Toast.LENGTH_SHORT).show();
-          currentDateAndTime = "";
-        }
       }
     });
   }
@@ -405,14 +361,6 @@ public class LiveVideoStreamingActivity extends AppCompatActivity
 
   @Override
   public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 && rtmpCamera1.isRecording()) {
-      rtmpCamera1.stopRecord();
-      bRecord.setText(R.string.start_record);
-      Toast.makeText(this,
-          "file " + currentDateAndTime + ".mp4 saved in " + folder.getAbsolutePath(),
-          Toast.LENGTH_SHORT).show();
-      currentDateAndTime = "";
-    }
     if (rtmpCamera1.isStreaming()) {
       rtmpCamera1.stopStream();
       bStartStop.setText(getResources().getString(R.string.start_button));

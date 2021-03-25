@@ -1,14 +1,16 @@
 # MediaStreaming - LiveVideoStreaming
- 
+
 Repository for the LiveVideoStreaming of Media Streaming Module (T3.3).
 
-### Video Call:
+### Live Video Streaming:
 This functionality allows the user to stream the video from the device camera to the Personal Storage via RTMP. To use this capability, an RTMP server is needed. 
 To start the video streaming it is necessary to introduce the RTMP url like this: `rtmp://$IP_of_server:1935/$App/$stream_name`.
 
-### How to use Video Call:
+### How to use Live Video Streaming:
+It must be expecified the stream URL.
 ```        
         Intent liveVideoStreamingIntent = new Intent(MainActivity.this, LiveVideoStreamingActivity.class);
+        liveVideoStreamingIntent.putExtra("stream_url", "rtmp://1.1.1.1:1935/helios/stream_name");
         MainActivity.this.startActivity(liveVideoStreamingIntent);
 ```
 
@@ -91,6 +93,6 @@ To request Jenkins username and password, contact with: `carlosalberto.martinedo
 To use the dependency in `build.gradle` of the "father" project, you should specify the last version available in Nexus, related to the last Jenkins's deploy.
 For example, to declare the dependency on the videocall module and the respective version:
 
-`implementation 'eu.h2020.helios_social.modules.livevideostreaming:livevideostreaming:1.0.15'`
+`implementation 'eu.h2020.helios_social.modules.livevideostreaming:livevideostreaming:1.0.20'`
 
 For more info review: `https://scm.atosresearch.eu/ari/helios_group/generic-issues/blob/master/multiprojectDependencies.md`

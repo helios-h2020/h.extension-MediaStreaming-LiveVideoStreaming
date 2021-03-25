@@ -64,18 +64,18 @@
                 />
         </menu>
     </item>
-    <item android:title="@string/wowza_auth">
+    <item
+        android:title="@string/wowza_auth"
+        android:visible="false">
         <menu>
             <item
-                android:title="@string/wowza_user"
-                app:actionLayout="@xml/edit_text_auth"
                 android:id="@+id/et_wowza_user"
-                />
+                android:title="@string/wowza_user"
+                app:actionLayout="@xml/edit_text_auth" />
             <item
-                android:title="@string/wowza_password"
-                app:actionLayout="@xml/edit_text_auth"
                 android:id="@+id/et_wowza_password"
-                />
+                android:title="@string/wowza_password"
+                app:actionLayout="@xml/edit_text_auth" />
         </menu>
     </item>
 </menu>
