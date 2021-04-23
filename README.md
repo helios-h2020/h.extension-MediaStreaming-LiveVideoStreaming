@@ -96,3 +96,10 @@ For example, to declare the dependency on the videocall module and the respectiv
 `implementation 'eu.h2020.helios_social.modules.livevideostreaming:livevideostreaming:1.0.21'`
 
 For more info review: `https://scm.atosresearch.eu/ari/helios_group/generic-issues/blob/master/multiprojectDependencies.md`
+
+
+### LiveStreaming module storage</h2>
+
+The module implements a local storage system to generate and consume the segments of the stream.
+
+<img src="https://raw.githubusercontent.com/helios-h2020/h.extension-MediaStreaming-LiveVideoStreaming/master/doc/livestreaming_storage.png" alt="LiveStreaming local storage implementation">
