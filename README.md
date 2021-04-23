@@ -100,6 +100,6 @@ For more info review: `https://scm.atosresearch.eu/ari/helios_group/generic-issu
 
 ### LiveStreaming module storage</h2>
 
-The module implements a local storage system to generate and consume the segments of the stream.
+The module implements a local storage system to generate and consume the live stream.
 
 <img src="https://raw.githubusercontent.com/helios-h2020/h.extension-MediaStreaming-LiveVideoStreaming/master/doc/livestreaming_storage.png" alt="LiveStreaming local storage implementation">
