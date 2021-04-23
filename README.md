@@ -24,7 +24,8 @@ https://github.com/helios-h2020/h.extension-MediaStreaming-VideoPlayer
 For this is needed to use an url like `http://$IP_of_server:800/hls/stream_name.m3u8` 
 
 ### How to use Live Video Streaming:
-It must be expecified the stream URL.
+
+To call the extension from your application, include in your activity the stream URL.
 ```        
         Intent liveVideoStreamingIntent = new Intent(MainActivity.this, LiveVideoStreamingActivity.class);
         liveVideoStreamingIntent.putExtra("stream_url", "rtmp://1.1.1.1:1936/helios/stream_name");
@@ -32,7 +33,7 @@ It must be expecified the stream URL.
 ```
 
 ### Request permissions
-Before start activity of the live video streaming intent:
+Before start activity of the live video streaming intent from the activity of your application:
 ```
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
