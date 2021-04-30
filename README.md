@@ -3,7 +3,7 @@
 Repository for the LiveVideoStreaming of Media Streaming Module (T3.3).
 
 ### Live Video Streaming:
-This functionality allows the user to stream a live video from the device camera to the Personal Storage via RTMP. To use this capability, an RTMP server is needed. 
+This functionality allows the user to stream a live video from the device camera to the Personal Storage via RTMP. To use this capability, an RTMP (Real Time Messaging Protocol) server is needed. 
 To start the video streaming (e.g. using the MediaStreaming App to call this extension) it is necessary to introduce the RTMP url like this: `rtmp://$IP_of_server:1936/$App/$stream_name`.
 
 MediaStreaming App: https://github.com/helios-h2020/h.app-MediaStreaming
